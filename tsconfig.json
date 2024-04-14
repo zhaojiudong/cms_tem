@@ -10,6 +10,13 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@interceptor/*": ["src/interceptor/*"],
+      "@guard/*": ["src/guard/*"],
+      "@decorator/*": ["src/decorator/*"],
+      "@utils/*": ["src/utils/*"],
+      "@redis/*": ["src/redis/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

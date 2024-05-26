@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RedisModule } from './redis/redis.module';
@@ -41,7 +41,7 @@ import { RedisModule } from './redis/redis.module';
           poolSize: 10,
           connectorPackage: 'mysql2',
           extra: {
-              authPlugin: 'sha256_password',
+            authPlugin: 'sha256_password',
           }
         }
       },

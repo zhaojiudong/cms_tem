@@ -1,24 +1,24 @@
+import { BadRequestException, Body, Controller, DefaultValuePipe, Get, HttpStatus, Inject, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { BadRequestException, Body, Controller, DefaultValuePipe, Get, HttpException, HttpStatus, Inject, ParseIntPipe, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 // import { EmailService } from 'src/email/email.service';
+import { UnauthorizedException } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBearerAuth, ApiBody, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import * as path from 'path';
+import { RequireLogin, UserInfo } from 'src/decorator/custom.decorator';
 import { RedisService } from 'src/redis/redis.service';
+import { generateParseIntPipe } from 'src/utils';
+import { storage } from 'src/utils/my-file-storage';
 import { LoginUserDto } from './dto/login-user.dto';
 import { RegisterUserDto } from './dto/register-user.dto';
-import { UserService } from './user.service';
-import { UnauthorizedException } from '@nestjs/common';
-import { RequireLogin, UserInfo } from 'src/decorator/custom.decorator';
-import { UserDetailVo } from './vo/user-info.vo';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { generateParseIntPipe } from 'src/utils';
-import { ApiBearerAuth, ApiBody, ApiProperty, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UserService } from './user.service';
 import { LoginUserVo } from './vo/login-user.vo';
 import { RefreshTokenVo } from './vo/refresh-token.vo';
+import { UserDetailVo } from './vo/user-info.vo';
 import { UserListVo } from './vo/user-list.vo';
-import { FileInterceptor } from '@nestjs/platform-express';
-import * as path from 'path';
-import { storage } from 'src/utils/my-file-storage';
 
 @ApiTags('用户管理模块')
 @Controller('user')
@@ -71,7 +71,7 @@ export class UserController {
   @Post('register')
   async register(@Body() registerUser: RegisterUserDto) {
     return await this.userService.register(registerUser);
-  }   
+  }
 
   @Get("init-data")
   async initData() {

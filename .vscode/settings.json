@@ -1,8 +1,8 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
+        // "source.fixAll": "explicit",
         // "source.fixAlleslint": "explicit",    // 这个可以触发eslint校验，把没有引用的代码自动删除
-        "source.fixAllstylelint": "explicit",
-        "source.organizeImports": "explicit"
+        // "source.fixAllstylelint": "explicit",
+        // "source.organizeImports": "explicit"
     }
 }

@@ -4,7 +4,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SystemModule } from './modules/system/system.module';
 import { RedisModule } from './redis/redis.module';
+import { SysUser } from './modules/system/user/entries/sys-user.entity';
+
 
 @Module({
   imports: [
@@ -34,10 +37,11 @@ import { RedisModule } from './redis/redis.module';
           password: configService.get('mysql_server_password'),
           database: configService.get('mysql_server_database'),
           synchronize: true,
+          autoLoadEntities: true,
           logging: true,
-          entities: [
-            // User, Role, Permission
-          ],
+          // entities: [
+          //   SysUser
+          // ],
           poolSize: 10,
           connectorPackage: 'mysql2',
           extra: {
@@ -48,6 +52,7 @@ import { RedisModule } from './redis/redis.module';
       inject: [ConfigService]
     }),
     RedisModule,
+    SystemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

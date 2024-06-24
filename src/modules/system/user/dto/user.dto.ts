@@ -2,7 +2,8 @@ import { OmitType } from '@nestjs/mapped-types'
 
 import { Allow, IsArray, IsOptional } from 'class-validator'
 import { PaginateDto } from 'src/modules/core/dto'
-import { SysUser } from './sys-user.entity'
+import { SysUser } from '../entries/sys-user.entity'
+
 
 
 /**

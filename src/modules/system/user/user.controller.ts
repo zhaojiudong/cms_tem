@@ -57,7 +57,6 @@ export class UserController {
       return AjaxResult.error(`新增用户${user.userName}失败，手机号码已存在`)
     }
 
-    user.createBy = this.securityContext.getUserName()
     return AjaxResult.success(await this.userService.add(user))
   }
 
